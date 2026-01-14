@@ -1,7 +1,7 @@
 
 # Embedded Security System with UART Communication
 
-This is a simulation of a microcontroller-based security system designed using two **ATmega32** microcontrollers. The system integrates a PIR sensor, keypad, LCD, LEDs, buzzer, 7-segment display, and DC motor to emulate a complete access control and intruder alert system. The project is developed and simulated using **Proteus Design Suite**, with all driver files written manually in C.
+This is a simulation of a microcontroller-based security system designed using two **ATmega32** microcontrollers. The system integrates a PIR sensor, keypad, LCD, LEDs, buzzer, 7-segment display, and DC motor to emulate a complete access control and intruder alert system. The project is developed and simulated using **Proteus Design Suite**, with all driver files written manually in C...
 
 ---
 
