@@ -1,7 +1,7 @@
 
 # 🎮 Maze Game 
 
-A smart and engaging maze game designed for one or two players using servo-controlled tilt mechanics. Players control the maze using either a **joystick** or an **app**, and aim to guide a ball to the goal within a time limit. The project combines **mechanical design**, **Arduino programming**, **real-time feedback**, and **user interaction** in a fun, challenging experience.
+A smart and engaging maze game designed for one or two players using servo-controlled tilt mechanics. Players control the maze using either a **joystick** or an **app**, and aim to guide a ball to the goal within a time limit. The project combines **mechanical design**, **Arduino programming**, **real-time feedback**, and **user interaction** in a fun, challenging experience...
 
 ---
 
