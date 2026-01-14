@@ -1,7 +1,7 @@
 
 # PCB Defect Detection System using YOLOv8
 
-This project presents a real-time **Printed Circuit Board (PCB) defect detection system** leveraging the **YOLOv8** deep learning model, trained on a comprehensive dataset and deployed on a **Raspberry Pi** for practical use on production lines.
+This project presents a real-time **Printed Circuit Board (PCB) defect detection system** leveraging the **YOLOv8** deep learning model, trained on a comprehensive dataset and deployed on a **Raspberry Pi** for practical use on production lines...
 
 ---
 
