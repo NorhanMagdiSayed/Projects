@@ -8,7 +8,7 @@
 This project is a practical implementation of a **Frequency Modulated Continuous Wave (FMCW) radar**.  
 I built the **IF (baseband) circuitry** on a breadboard, connected it to an **RF front-end**, and assembled a complete radar setup capable of producing a **beat (IF) signal** that can be analyzed using FFT to detect targets.
 
-## How FMCW Radar Works (Short)
+## How FMCW Radar Works 
 FMCW radar transmits a frequency-modulated RF signal (triangular ramp). The received echo is delayed, and when it is mixed with the transmitted signal, it produces a **beat frequency**.  
 That beat frequency is used to estimate **range** (and can also be used for motion depending on waveform and processing).
 
