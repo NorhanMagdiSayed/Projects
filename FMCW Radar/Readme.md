@@ -1,92 +1,126 @@
-# FMCW Radar Prototype (Hardware Build)
+# FMCW Radar Prototype (Hardware + Software)
 
 <p align="center">
-  <img src="Images/1.jpeg" width="550">
+  <img src="Images/1.jpeg" width="520">
 </p>
 
 ## Overview
-This project is a practical implementation of a **Frequency Modulated Continuous Wave (FMCW) radar**.  
-I built the **IF (baseband) circuitry** on a breadboard, connected it to an **RF front-end**, and assembled a complete radar setup capable of producing a **beat (IF) signal** that can be analyzed using FFT to detect targets.
-
-## How FMCW Radar Works 
-FMCW radar transmits a frequency-modulated RF signal (triangular ramp). The received echo is delayed, and when it is mixed with the transmitted signal, it produces a **beat frequency**.  
-That beat frequency is used to estimate **range** (and can also be used for motion depending on waveform and processing).
+This project is a practical implementation of a **Frequency Modulated Continuous Wave (FMCW) radar**.
+I assembled the **IF/baseband circuit** on a breadboard, connected it to an **RF front-end**, and processed the recorded beat signal in **MATLAB** to generate **Range–Time Intensity (RTI) heatmaps**.
 
 ---
 
 ## System Architecture
 
 <p align="center">
-  <img src="Images/Block diagram of the target FMCW radar.png" width="700">
+  <img src="Images/Block diagram of the target FMCW radar.png" width="680">
 </p>
 
-The radar consists of three main parts:
-1. **Analog front-end (RF TX/RX):** transmit, receive, and mixing stages  
-2. **Antennas:** for transmission and reception  
-3. **IF/Baseband chain + processing:** filtering/amplification and signal analysis  
+Main parts:
+1. **RF TX/RX front-end:** VCO/modulator, PA, divider, LNA, mixer, antennas  
+2. **IF/Baseband chain (breadboard):** power supply, ramp generator + sync, low-pass filter, video amplifier  
+3. **Software processing:** sync-triggered slicing + FFT → RTI heatmap
 
 ---
 
 ## IF / Baseband Hardware (Breadboard)
 
-### 1) Power Supply
+### Power Supply
 <p align="center">
-  <img src="Images/Schematic of power supply.png" width="650">
+  <img src="Images/Schematic of power supply.png" width="620">
 </p>
 
-### 2) Ramp (Triangle) Generator
+### Ramp (Triangle) Generator
 <p align="center">
-  <img src="Images/Schematic of the ramp generator.png" width="650">
+  <img src="Images/Schematic of the ramp generator.png" width="620">
 </p>
 
-### 3) Low-pass Filter
+### Low-pass Filter
 <p align="center">
-  <img src="Images/Schematic of the Low-pass Filter.png" width="650">
+  <img src="Images/Schematic of the Low-pass Filter.png" width="620">
 </p>
 
-### 4) Video Amplifier
+### Video Amplifier
 <p align="center">
-  <img src="Images/Schematic of the Video Amplifier.png" width="650">
+  <img src="Images/Schematic of the Video Amplifier.png" width="620">
 </p>
 
 ---
 
 ## Build Photos
 
-### Full radar setup
 <p align="center">
-  <img src="Images/1.jpeg" width="420">
-  <img src="Images/4.jpeg" width="420">
- 
+  <img src="Images/2.jpeg" width="360">
+  <img src="Images/3.jpeg" width="360">
+  <img src="Images/5.jpeg" width="360">
 </p>
 
-### Top views / wiring
 <p align="center">
-  <img src="Images/2.jpeg" width="420">
-  <img src="Images/3.jpeg" width="420">
-  <img src="Images/5.jpeg" width="420">
-</p>
-
-### Measurement / test setup
-<p align="center">
-  <img src="Images/7.jpeg" width="520">
+  <img src="Images/4.jpeg" width="360">
+  <img src="Images/6.jpeg" width="360">
+  <img src="Images/7.jpeg" width="360">
 </p>
 
 ---
 
-## How to Run / Test (Quick)
-1. Power the circuit and confirm stable supply voltages.
-2. Check the ramp generator output (triangle + sync if available).
-3. Connect the RF chain and verify the modulated RF output and mixer output.
-4. Feed the mixer output into the IF chain (LPF + amplifier).
-5. Capture the **video/beat signal** and apply FFT to identify peaks (targets).
+## Software Processing (MATLAB)
+
+The radar output was recorded as a **stereo audio signal**:
+- **Channel 1:** sync/trigger (square wave)
+- **Channel 2:** IF/beat signal (scaled)
+
+The script performs:
+1. **Read from file or record live**
+   - `READ_FROM_FILE = true` reads a `.wav`
+   - otherwise records from the selected audio device
+2. **Sync detection**
+   - Convert trigger to 0/1 using a threshold
+   - Detect **rising** and **falling** edges
+3. **Fast-time / slow-time slicing**
+   - Use each edge as the start of one ramp
+   - Build matrices: `pos_signal_mat` and `neg_signal_mat`
+     - rows = slow time (chirps)
+     - columns = fast time (samples per chirp)
+4. **DC-bias removal**
+   - Remove mean across fast time and slow time to reduce constant offsets
+5. **FFT across fast time**
+   - Zero-padding improves frequency (range) resolution
+   - Convert magnitude to dB and normalize
+6. **Clutter rejection (MTI-like)**
+   - `diff()` across slow time reduces stationary reflections
+
+### How to run
+- Put the `.wav` file next to the MATLAB script (or update the filename in `audioread()`).
+- Run the script to generate RTI plots.
+
+> Note: If your `.wav` is large, it’s better not to commit it to GitHub (or use Git LFS).
+
+---
+
+## Results: RTI Heatmaps (Street Recording)
+
+These RTI heatmaps were generated from a **street recording**. Over time, the scene included:
+**a pedestrian → a cyclist → a car → a bus**.
+
+- Without clutter rejection: stationary reflections/strong background are more visible.
+- With clutter rejection: moving objects stand out more clearly.
+
+<p align="center">
+  <img src="Images/11.png" width="360">
+  <img src="Images/10.png" width="360">
+</p>
+
+<p align="center">
+  <img src="Images/9.png" width="360">
+  <img src="Images/8.png" width="360">
+</p>
 
 ---
 
 ## Notes
+- Keep wiring short and ensure solid grounding to reduce noise/coupling.
 - Verify each stage independently before connecting the full system.
-- Keep wiring short and ensure solid grounding to reduce coupling and noise.
-- If the signal clips, reduce gain in the video amplifier stage.
+- If the IF signal clips, reduce video amplifier gain.
 
 ## Keywords
-FMCW Radar, RF Front-End, Mixer, LNA, VCO, Beat Frequency, IF Signal, FFT
+FMCW Radar, RTI, Beat Frequency, FFT, Clutter Rejection, MTI, Range-Time Heatmap
