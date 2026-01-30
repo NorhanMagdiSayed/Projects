@@ -14,7 +14,7 @@ That beat frequency contains information about **range** (and with up/down ramps
 ![FMCW principle](images/fmcw-principle.png)
 
 ## System Block Diagram
-![Radar block diagram](Images/Block diagram of the target FMCW radar.png)
+![Radar block diagram](Radar Prototype/Images/Block diagram of the target FMCW radar.png)
 
 **Main parts:**
 - **Baseband / IF (breadboard):** power supply, ramp (triangle) generator + sync, low-pass filter, video amplifier
