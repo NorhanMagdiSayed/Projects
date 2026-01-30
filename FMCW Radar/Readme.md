@@ -1,65 +1,76 @@
-
 # FMCW Radar Prototype (Hardware Build)
 
-![FMCW Radar Setup](<Images/1.jpeg>)
+<p align="center">
+  <img src="Images/1.jpeg" width="550">
+</p>
 
 ## Overview
 This project is a practical implementation of a **Frequency Modulated Continuous Wave (FMCW) radar**.  
-I built the **IF (baseband) circuitry** on a breadboard, connected it with an **RF front-end**, and assembled a complete radar setup capable of producing a **beat (IF) signal** that can be analyzed using FFT to detect targets.
+I built the **IF (baseband) circuitry** on a breadboard, connected it to an **RF front-end**, and assembled a complete radar setup capable of producing a **beat (IF) signal** that can be analyzed using FFT to detect targets.
 
 ## How FMCW Radar Works (Short)
 FMCW radar transmits a frequency-modulated RF signal (triangular ramp). The received echo is delayed, and when it is mixed with the transmitted signal, it produces a **beat frequency**.  
-That beat frequency is used to estimate **range** (and can also be used for motion depending on the waveform and processing).
+That beat frequency is used to estimate **range** (and can also be used for motion depending on waveform and processing).
 
 ---
 
 ## System Architecture
+
+<p align="center">
+  <img src="Images/Block diagram of the target FMCW radar.png" width="700">
+</p>
+
 The radar consists of three main parts:
 1. **Analog front-end (RF TX/RX):** transmit, receive, and mixing stages  
 2. **Antennas:** for transmission and reception  
-3. **IF/Baseband chain + processing:** filtering/amplification and signal analysis
-
-![Block Diagram](<Images/Block diagram of the target FMCW radar.png>)
+3. **IF/Baseband chain + processing:** filtering/amplification and signal analysis  
 
 ---
 
 ## IF / Baseband Hardware (Breadboard)
-The IF chain was assembled step-by-step and verified at each stage:
 
 ### 1) Power Supply
-Provides stable rails for the baseband circuitry.
-
-![Power Supply Schematic](<Images/Schematic of power supply.png>)
+<p align="center">
+  <img src="Images/Schematic of power supply.png" width="650">
+</p>
 
 ### 2) Ramp (Triangle) Generator
-Generates the modulation ramp (and sync) used to drive the RF modulation.
-
-![Ramp Generator Schematic](<Images/Schematic of the ramp generator.png>)
+<p align="center">
+  <img src="Images/Schematic of the ramp generator.png" width="650">
+</p>
 
 ### 3) Low-pass Filter
-Limits the bandwidth of the IF/beat signal and reduces high-frequency noise.
-
-![Low-pass Filter Schematic](<Images/Schematic of the Low-pass Filter.png>)
+<p align="center">
+  <img src="Images/Schematic of the Low-pass Filter.png" width="650">
+</p>
 
 ### 4) Video Amplifier
-Amplifies the IF/beat signal to a measurable level (gain can be adjusted).
-
-![Video Amplifier Schematic](<Images/Schematic of the Video Amplifier.png>)
+<p align="center">
+  <img src="Images/Schematic of the Video Amplifier.png" width="650">
+</p>
 
 ---
 
 ## Build Photos
-### Full setup
-![Full setup](<Images/6.jpeg>)
 
-### Setup with measurement/laptop
-![Setup with laptop](<Images/2.jpeg>)
-![Setup with laptop](<Images/3.jpeg>)
+### Full radar setup
+<p align="center">
+  <img src="Images/1.jpeg" width="420">
+  <img src="Images/4.jpeg" width="420">
+  <img src="Images/6.jpeg" width="420">
+</p>
 
 ### Top views / wiring
-![Top view](<Images/4.jpeg>)
-![Top view](<Images/5.jpeg>)
-![Breadboard close-up](<Images/7.jpeg>)
+<p align="center">
+  <img src="Images/2.jpeg" width="420">
+  <img src="Images/3.jpeg" width="420">
+  <img src="Images/5.jpeg" width="420">
+</p>
+
+### Measurement / test setup
+<p align="center">
+  <img src="Images/7.jpeg" width="520">
+</p>
 
 ---
 
