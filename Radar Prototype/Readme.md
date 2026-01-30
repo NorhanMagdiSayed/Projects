@@ -1,8 +1,8 @@
 # FMCW Radar Prototype (Hardware Build)
 
-![FMCW radar setup](Images/6.jpg)
+![FMCW radar setup](<Images/6.jpg)
 (Images/4.jpg)
-## Overview
+## Overvie
 This project is a hands-on build of a **Frequency Modulated Continuous Wave (FMCW) radar**.  
 I assembled the **baseband (IF) circuitry on a breadboard** and connected it to an **RF front-end** to transmit/receive signals, then extracted the **beat signal** for target detection using FFT-based analysis.
 
