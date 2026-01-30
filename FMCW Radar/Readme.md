@@ -57,7 +57,7 @@ The radar consists of three main parts:
 <p align="center">
   <img src="Images/1.jpeg" width="420">
   <img src="Images/4.jpeg" width="420">
-  <img src="Images/6.jpeg" width="420">
+ 
 </p>
 
 ### Top views / wiring
